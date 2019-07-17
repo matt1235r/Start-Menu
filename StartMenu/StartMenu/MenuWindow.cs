@@ -57,7 +57,6 @@ namespace StartMenu
             foreach (DirectoryInfo folder in dir.GetDirectories())
             {
                 allFilesTreeView.Nodes.Add(folder.Name, folder.Name, "$directoryempty$", "$directoryempty$");
-                
                 foreach (FileInfo file in folder.GetFiles())
                 {
 
@@ -66,7 +65,7 @@ namespace StartMenu
                     iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
                     fileImageList.Images.Add(file.FullName, iconForFile);
                     filecache.Add(file.FullName);
-                    allFilesTreeView.Nodes[folder.Name].Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);
+                    allFilesTreeView.Nodes[folder.Name].Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);                    
                 }
             }
 
@@ -77,8 +76,14 @@ namespace StartMenu
                 fileImageList.Images.Add(file.FullName, iconForFile);
                 filecache.Add(file.FullName);
                 allFilesTreeView.Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);
+                allAppsToolStripMenuItem.DropDownItems.Add(Path.GetFileNameWithoutExtension(file.Name), fileImageList.Images[file.FullName]);
             }
 
+            searchTreeView.Sort();
+            foreach(String file in filecache)
+            {
+                allAppsToolStripMenuItem.DropDownItems.Add(Path.GetFileNameWithoutExtension(file), fileImageList.Images[file]);               
+            }
             favouritesListView.BeginUpdate();
 
 
@@ -387,7 +392,8 @@ namespace StartMenu
        
         private void startButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+
+            if (e.Button == MouseButtons.Left)
             {
                 if (Visible == true)
                 {
@@ -396,15 +402,40 @@ namespace StartMenu
                 else
                 {
                     Visible = true;
-                    Focus();
+                    Activate();
                 }
             }
-            
+
         }
 
         private void Window_Deactivate(object sender, EventArgs e)
         {
             cleanClose();
+        }
+
+        private void allAppsToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            try
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = e.ClickedItem.Tag.ToString();
+                p.Start();
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void backgroundPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            label2.Text = Focused.ToString();
+        }
+
+        private void startButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            
         }
     }
 }

@@ -64,12 +64,20 @@ namespace StartMenu
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startButton = new System.Windows.Forms.NotifyIcon(this.components);
+            this.startMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.favouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.myComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.powerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profileIcon)).BeginInit();
             this.backgroundPanel.SuspendLayout();
             this.allMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.favouritesListView)).BeginInit();
             this.FavouritesMenuStrip.SuspendLayout();
+            this.startMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -145,6 +153,7 @@ namespace StartMenu
             this.backgroundPanel.Name = "backgroundPanel";
             this.backgroundPanel.Size = new System.Drawing.Size(577, 589);
             this.backgroundPanel.TabIndex = 1;
+            this.backgroundPanel.VisibleChanged += new System.EventHandler(this.backgroundPanel_VisibleChanged);
             // 
             // searchTreeView
             // 
@@ -364,10 +373,65 @@ namespace StartMenu
             // 
             // startButton
             // 
+            this.startButton.ContextMenuStrip = this.startMenuStrip;
             this.startButton.Icon = ((System.Drawing.Icon)(resources.GetObject("startButton.Icon")));
             this.startButton.Text = "Old Start";
             this.startButton.Visible = true;
             this.startButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.startButton_MouseDown);
+            this.startButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.startButton_MouseUp);
+            // 
+            // startMenuStrip
+            // 
+            this.startMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.favouritesToolStripMenuItem,
+            this.allAppsToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.myComputerToolStripMenuItem,
+            this.powerOptionsToolStripMenuItem,
+            this.taskManagerToolStripMenuItem});
+            this.startMenuStrip.Name = "startMenuStrip";
+            this.startMenuStrip.Size = new System.Drawing.Size(153, 120);
+            // 
+            // favouritesToolStripMenuItem
+            // 
+            this.favouritesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("favouritesToolStripMenuItem.Image")));
+            this.favouritesToolStripMenuItem.Name = "favouritesToolStripMenuItem";
+            this.favouritesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.favouritesToolStripMenuItem.Text = "Favourites";
+            // 
+            // allAppsToolStripMenuItem
+            // 
+            this.allAppsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("allAppsToolStripMenuItem.Image")));
+            this.allAppsToolStripMenuItem.Name = "allAppsToolStripMenuItem";
+            this.allAppsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.allAppsToolStripMenuItem.Text = "All Apps";
+            this.allAppsToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.allAppsToolStripMenuItem_DropDownItemClicked);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            // 
+            // myComputerToolStripMenuItem
+            // 
+            this.myComputerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("myComputerToolStripMenuItem.Image")));
+            this.myComputerToolStripMenuItem.Name = "myComputerToolStripMenuItem";
+            this.myComputerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.myComputerToolStripMenuItem.Text = "My Computer";
+            // 
+            // powerOptionsToolStripMenuItem
+            // 
+            this.powerOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("powerOptionsToolStripMenuItem.Image")));
+            this.powerOptionsToolStripMenuItem.Name = "powerOptionsToolStripMenuItem";
+            this.powerOptionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.powerOptionsToolStripMenuItem.Text = "Power Options";
+            // 
+            // taskManagerToolStripMenuItem
+            // 
+            this.taskManagerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("taskManagerToolStripMenuItem.Image")));
+            this.taskManagerToolStripMenuItem.Name = "taskManagerToolStripMenuItem";
+            this.taskManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.taskManagerToolStripMenuItem.Text = "Task Manager";
             // 
             // Window
             // 
@@ -391,6 +455,7 @@ namespace StartMenu
             this.allMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.favouritesListView)).EndInit();
             this.FavouritesMenuStrip.ResumeLayout(false);
+            this.startMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -428,6 +493,13 @@ namespace StartMenu
         private System.Windows.Forms.NotifyIcon startButton;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.TreeView searchTreeView;
+        private System.Windows.Forms.ContextMenuStrip startMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem favouritesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allAppsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem myComputerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem powerOptionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taskManagerToolStripMenuItem;
     }
 }
 
