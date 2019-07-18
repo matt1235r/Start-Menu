@@ -7,69 +7,127 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StartMenu
 {
-    public partial class Window : Form
+    public partial class MenuWindow : Form
     {
         private List<string> filecache = new List<string>();
-        public Window()
+        public MenuWindow()
         {
             InitializeComponent();
-            this.LostFocus += new EventHandler(Form1_LostFocus);
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);
             Populate();
+
+            
+            // Register the "INSER" hotkey
+            Boolean F9Registered = RegisterHotKey(
+                this.Handle, 1, 0x0000, (int)Keys.Insert
+            );
         }
 
-        bool yes = false;
-
-        private void Form1_LostFocus(object sender, EventArgs e)
-
+        public void LoadSettings()
         {
-            if (yes)
-            {
-                this.Hide();
+            //Hide Start Button + Menu While Updating
+            startButton.Visible = false;
+            cleanClose();
 
-                Application.Exit();
+            //Assign Start Menu Icon from Settings
+            if (Properties.Settings.Default.UseStartIconFile)
+            {
+                try
+                {
+
+                    Icon startIcon = Icon.ExtractAssociatedIcon(Properties.Settings.Default.StartIconFile);
+                    startButton.Icon = startIcon;
+                }
+                catch
+                {
+                    startButton.Icon = Properties.Resources.StartIcon;
+                }
+            }
+            else
+            {
+                startButton.Icon = Properties.Resources.StartIcon;
             }
 
+            //Assign Background from Settings
+            if (Properties.Settings.Default.UseBackgroundFile){
+                try
+                {
 
+                    Image background = Image.FromFile(Properties.Settings.Default.BackgroundFile);
+                    backgroundPanel.BackgroundImage = background;
+                    favouritesListView.BackgroundImage = background;
+                }
+                catch
+                {
+                    backgroundPanel.BackgroundImage = Properties.Resources.Background;
+                    favouritesListView.BackgroundImage = Properties.Resources.Background;
+                }
+            }
+            else
+            {
+                backgroundPanel.BackgroundImage = Properties.Resources.Background;
+                favouritesListView.BackgroundImage = Properties.Resources.Background;
+            }
+
+            favouritesListView.RedrawItems();
+            //Show start burron when finished
+            startButton.Visible = true;
         }
 
         private void Populate()
         {
-            usernamelabel.Text = Environment.UserName;
-            domainlabel.Text = Environment.UserDomainName;
-            ExtractAssociatedIconEx();
-        }
+            LoadSettings();
+            //Hide Start Button + Menu While Updating
+            startButton.Visible = false;
+            cleanClose();
+            //Assign Start Menu Icon from Settings
+            try
+            {
 
-        public void ExtractAssociatedIconEx()
-        {
-            DirectoryInfo dir = new System.IO.DirectoryInfo(@"C:\ProgramData\Microsoft\Windows\Start Menu\Programs");
+                Icon startIcon = Icon.ExtractAssociatedIcon(Properties.Settings.Default.StartIconFile);
+                startButton.Icon = startIcon;
+            }
+            catch
+            {
+                startButton.Icon = Properties.Resources.StartIcon;
+            }
+
+            //Start Menu Text
+            usernameLabel.Text = Environment.UserName;
+            domainLabel.Text = Environment.UserDomainName;
 
 
+            //Folder objects
+            DirectoryInfo allDir = new System.IO.DirectoryInfo(Properties.Settings.Default.AllAppsFolder);
+            DirectoryInfo favDir = new System.IO.DirectoryInfo(Properties.Settings.Default.FavouritesFolder);
 
-            foreach (DirectoryInfo folder in dir.GetDirectories())
+            //Add Child Directories to start menu all apps.
+            foreach (DirectoryInfo folder in allDir.GetDirectories())
             {
                 allFilesTreeView.Nodes.Add(folder.Name, folder.Name, "$directoryempty$", "$directoryempty$");
                 foreach (FileInfo file in folder.GetFiles())
                 {
-
+                    allFilesTreeView.Nodes[folder.Name].SelectedImageKey = "$directory$";
                     allFilesTreeView.Nodes[folder.Name].ImageKey = "$directory$";
                     Icon iconForFile = SystemIcons.Exclamation;
                     iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
                     fileImageList.Images.Add(file.FullName, iconForFile);
                     filecache.Add(file.FullName);
-                    allFilesTreeView.Nodes[folder.Name].Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);                    
+                    allFilesTreeView.Nodes[folder.Name].Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);
                 }
             }
 
-            foreach (FileInfo file in dir.GetFiles())
+            //Add files in root all apps folder.
+            foreach (FileInfo file in allDir.GetFiles())
             {
                 Icon iconForFile = SystemIcons.Exclamation;
                 iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
@@ -78,16 +136,20 @@ namespace StartMenu
                 allFilesTreeView.Nodes.Add(file.Name, Path.GetFileNameWithoutExtension(file.Name), file.FullName, file.FullName);
                 allAppsToolStripMenuItem.DropDownItems.Add(Path.GetFileNameWithoutExtension(file.Name), fileImageList.Images[file.FullName]);
             }
-
+           
             searchTreeView.Sort();
-            foreach(String file in filecache)
+
+            //Populate context menu strip all apps.
+            foreach (String file in filecache)
             {
-                allAppsToolStripMenuItem.DropDownItems.Add(Path.GetFileNameWithoutExtension(file), fileImageList.Images[file]);               
+                allAppsToolStripMenuItem.DropDownItems.Add(Path.GetFileNameWithoutExtension(file), fileImageList.Images[file]);
             }
+
+            //Favourites List
             favouritesListView.BeginUpdate();
 
 
-            foreach (FileInfo file in dir.GetFiles())
+            foreach (FileInfo file in favDir.GetFiles())
             {
                 // Set a default icon for the file.
                 Icon iconForFile = SystemIcons.Question;
@@ -100,11 +162,14 @@ namespace StartMenu
             }
 
             favouritesListView.EndUpdate();
-        }
 
-        private void Icons()
+            //Show Start Button Again
+            startButton.Visible = true;
+        }
+      
+        private void IndexIcons()
         {
-            foreach (string file in Directory.GetFiles(@"C:\ProgramData\Microsoft\Windows\Start Menu\Programs"))
+            foreach (string file in Directory.GetFiles(Properties.Settings.Default.AllAppsFolder))
             {
                 Image icon = Icon.ExtractAssociatedIcon(file).ToBitmap();
                 BetterListViewItem betterListViewItem = new BetterListViewItem();
@@ -113,12 +178,7 @@ namespace StartMenu
                 favouritesListView.Items.Add(betterListViewItem);
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            yes = true;
-        }
-
+       
         private void FavouritesMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             if (favouritesListView.SelectedItems.Count == 0)
@@ -336,6 +396,12 @@ namespace StartMenu
             }
         }
 
+        private void showMessage(string title, string message, int timeout)
+        {
+            startButton.BalloonTipText = message;
+            startButton.BalloonTipTitle = title;
+            startButton.ShowBalloonTip(timeout);
+        }
         private void allFilesTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if(e.Node.ImageKey == "$directory$")
@@ -378,31 +444,37 @@ namespace StartMenu
 
         private void cleanClose()
         {
+            WindowState = FormWindowState.Minimized;
             this.Visible = false;
             searchTreeView.CollapseAll();
             searchTreeView.SelectedNode = null;
             searchTextBox.Clear();
 
             allFilesTreeView.CollapseAll();
-            allFilesTreeView.SelectedNode = null;
-
-            
+            allFilesTreeView.SelectedNode = null;   
 
         }
        
         private void startButton_MouseDown(object sender, MouseEventArgs e)
         {
+            
+            
 
             if (e.Button == MouseButtons.Left)
             {
-                if (Visible == true)
+                if (WindowState == FormWindowState.Normal)
                 {
                     cleanClose();
                 }
                 else
                 {
-                    Visible = true;
-                    Activate();
+                    this.Visible = true;
+                    WindowState = FormWindowState.Normal;
+                    
+                    Rectangle workingArea = Screen.GetWorkingArea(this);
+                    this.Location = new Point(workingArea.Right - Size.Width,
+                                              workingArea.Bottom - Size.Height);
+                    
                 }
             }
 
@@ -427,15 +499,55 @@ namespace StartMenu
                 //throw;
             }
         }
-
-        private void backgroundPanel_VisibleChanged(object sender, EventArgs e)
+       
+        private void button1_Click(object sender, EventArgs e)
         {
-            label2.Text = Focused.ToString();
+            new Settings(this).Show();
         }
 
-        private void startButton_MouseUp(object sender, MouseEventArgs e)
+        private void restartButton_Click(object sender, EventArgs e)
         {
+            Process.Start("shutdown", "/r /t 0");
             
+            startButton.BalloonTipText =
+              "I noticed that you double-clicked me! What can I do for you?";
+            startButton.BalloonTipTitle = "You called Master?";
+            startButton.ShowBalloonTip(10);
         }
+
+        private void shutdownButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("shutdown", "/s /t 0");
+        }
+
+
+        //Unmangaed
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        //[DllImport("user32.dll")]
+        //public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                if (WindowState == FormWindowState.Normal)
+                {
+                    cleanClose();
+                }
+                else
+                {
+                    this.Visible = true;
+                    WindowState = FormWindowState.Normal;
+
+                    Rectangle workingArea = Screen.GetWorkingArea(this);
+                    this.Location = new Point(workingArea.Right - Size.Width,
+                                              workingArea.Bottom - Size.Height);
+
+                }
+            }
+            base.WndProc(ref m);
+        }
+
     }
 }

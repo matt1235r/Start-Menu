@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="StartMenu.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AllAppsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\Microsoft\Windows\Start Menu\Programs</Value>
+    </Setting>
+    <Setting Name="FavouritesFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\Microsoft\Windows\Start Menu\Programs/Favourites</Value>
+    </Setting>
+    <Setting Name="StartIconFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\matt\Source\Repos\Start-Menu\StartMenu\StartMenu\bin\Debug\Assets\Windows_10.ico</Value>
+    </Setting>
+    <Setting Name="BackgroundFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UseStartIconFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseBackgroundFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

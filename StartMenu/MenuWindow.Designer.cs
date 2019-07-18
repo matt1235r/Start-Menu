@@ -2,7 +2,7 @@
 
 namespace StartMenu
 {
-    partial class Window
+    partial class MenuWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -31,20 +31,20 @@ namespace StartMenu
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Window));
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.domainlabel = new System.Windows.Forms.Label();
-            this.usernamelabel = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuWindow));
+            this.userPanel = new System.Windows.Forms.Panel();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.domainLabel = new System.Windows.Forms.Label();
+            this.usernameLabel = new System.Windows.Forms.Label();
             this.profileIcon = new System.Windows.Forms.PictureBox();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.searchTreeView = new System.Windows.Forms.TreeView();
             this.fileImageList = new System.Windows.Forms.ImageList(this.components);
             this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.appsLabel = new System.Windows.Forms.Label();
             this.allFilesTreeView = new System.Windows.Forms.TreeView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.restartButton = new System.Windows.Forms.Button();
+            this.shutdownButton = new System.Windows.Forms.Button();
             this.allMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenalltoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -71,7 +71,7 @@ namespace StartMenu
             this.myComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.powerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2.SuspendLayout();
+            this.userPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profileIcon)).BeginInit();
             this.backgroundPanel.SuspendLayout();
             this.allMenuStrip.SuspendLayout();
@@ -80,51 +80,52 @@ namespace StartMenu
             this.startMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel2
+            // userPanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.domainlabel);
-            this.panel2.Controls.Add(this.usernamelabel);
-            this.panel2.Controls.Add(this.profileIcon);
-            this.panel2.Location = new System.Drawing.Point(300, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(262, 100);
-            this.panel2.TabIndex = 1;
+            this.userPanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.userPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.userPanel.Controls.Add(this.settingsButton);
+            this.userPanel.Controls.Add(this.domainLabel);
+            this.userPanel.Controls.Add(this.usernameLabel);
+            this.userPanel.Controls.Add(this.profileIcon);
+            this.userPanel.Location = new System.Drawing.Point(300, 1);
+            this.userPanel.Name = "userPanel";
+            this.userPanel.Size = new System.Drawing.Size(262, 100);
+            this.userPanel.TabIndex = 1;
             // 
-            // button1
+            // settingsButton
             // 
-            this.button1.Location = new System.Drawing.Point(98, 65);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Settings";
-            this.button1.UseVisualStyleBackColor = true;
+            this.settingsButton.Location = new System.Drawing.Point(98, 65);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 23);
+            this.settingsButton.TabIndex = 3;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // domainlabel
+            // domainLabel
             // 
-            this.domainlabel.AutoSize = true;
-            this.domainlabel.BackColor = System.Drawing.Color.Transparent;
-            this.domainlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.domainlabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.domainlabel.Location = new System.Drawing.Point(95, 43);
-            this.domainlabel.Name = "domainlabel";
-            this.domainlabel.Size = new System.Drawing.Size(47, 15);
-            this.domainlabel.TabIndex = 2;
-            this.domainlabel.Text = "label1";
+            this.domainLabel.AutoSize = true;
+            this.domainLabel.BackColor = System.Drawing.Color.Transparent;
+            this.domainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.domainLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.domainLabel.Location = new System.Drawing.Point(95, 43);
+            this.domainLabel.Name = "domainLabel";
+            this.domainLabel.Size = new System.Drawing.Size(47, 15);
+            this.domainLabel.TabIndex = 2;
+            this.domainLabel.Text = "label1";
             // 
-            // usernamelabel
+            // usernameLabel
             // 
-            this.usernamelabel.AutoSize = true;
-            this.usernamelabel.BackColor = System.Drawing.Color.Transparent;
-            this.usernamelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernamelabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.usernamelabel.Location = new System.Drawing.Point(94, 19);
-            this.usernamelabel.Name = "usernamelabel";
-            this.usernamelabel.Size = new System.Drawing.Size(66, 24);
-            this.usernamelabel.TabIndex = 1;
-            this.usernamelabel.Text = "label1";
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.usernameLabel.Location = new System.Drawing.Point(94, 19);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(66, 24);
+            this.usernameLabel.TabIndex = 1;
+            this.usernameLabel.Text = "label1";
             // 
             // profileIcon
             // 
@@ -141,19 +142,19 @@ namespace StartMenu
             // 
             this.backgroundPanel.BackColor = System.Drawing.SystemColors.Menu;
             this.backgroundPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("backgroundPanel.BackgroundImage")));
+            this.backgroundPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.backgroundPanel.Controls.Add(this.searchTreeView);
             this.backgroundPanel.Controls.Add(this.searchTextBox);
-            this.backgroundPanel.Controls.Add(this.label1);
-            this.backgroundPanel.Controls.Add(this.panel2);
+            this.backgroundPanel.Controls.Add(this.appsLabel);
+            this.backgroundPanel.Controls.Add(this.userPanel);
             this.backgroundPanel.Controls.Add(this.allFilesTreeView);
-            this.backgroundPanel.Controls.Add(this.button2);
-            this.backgroundPanel.Controls.Add(this.button3);
+            this.backgroundPanel.Controls.Add(this.restartButton);
+            this.backgroundPanel.Controls.Add(this.shutdownButton);
             this.backgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
             this.backgroundPanel.Name = "backgroundPanel";
             this.backgroundPanel.Size = new System.Drawing.Size(577, 589);
             this.backgroundPanel.TabIndex = 1;
-            this.backgroundPanel.VisibleChanged += new System.EventHandler(this.backgroundPanel_VisibleChanged);
             // 
             // searchTreeView
             // 
@@ -185,17 +186,17 @@ namespace StartMenu
             this.searchTextBox.TabIndex = 7;
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
-            // label1
+            // appsLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 25);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "All Applications";
+            this.appsLabel.AutoSize = true;
+            this.appsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.appsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appsLabel.ForeColor = System.Drawing.Color.White;
+            this.appsLabel.Location = new System.Drawing.Point(12, 9);
+            this.appsLabel.Name = "appsLabel";
+            this.appsLabel.Size = new System.Drawing.Size(175, 25);
+            this.appsLabel.TabIndex = 6;
+            this.appsLabel.Text = "All Applications";
             // 
             // allFilesTreeView
             // 
@@ -214,24 +215,25 @@ namespace StartMenu
             this.allFilesTreeView.TabIndex = 5;
             this.allFilesTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.allFilesTreeView_NodeMouseClick);
             // 
-            // button2
+            // restartButton
             // 
-            this.button2.Location = new System.Drawing.Point(300, 538);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 32);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Restart";
-            this.button2.UseVisualStyleBackColor = true;
+            this.restartButton.Location = new System.Drawing.Point(300, 538);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(100, 32);
+            this.restartButton.TabIndex = 2;
+            this.restartButton.Text = "Restart";
+            this.restartButton.UseVisualStyleBackColor = true;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
             // 
-            // button3
+            // shutdownButton
             // 
-            this.button3.Location = new System.Drawing.Point(462, 538);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 32);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Shut Down";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.shutdownButton.Location = new System.Drawing.Point(462, 538);
+            this.shutdownButton.Name = "shutdownButton";
+            this.shutdownButton.Size = new System.Drawing.Size(100, 32);
+            this.shutdownButton.TabIndex = 3;
+            this.shutdownButton.Text = "Shut Down";
+            this.shutdownButton.UseVisualStyleBackColor = true;
+            this.shutdownButton.Click += new System.EventHandler(this.shutdownButton_Click);
             // 
             // allMenuStrip
             // 
@@ -300,6 +302,7 @@ namespace StartMenu
             // favouritesListView
             // 
             this.favouritesListView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("favouritesListView.BackgroundImage")));
+            this.favouritesListView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.favouritesListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.favouritesListView.ContextMenuStrip = this.FavouritesMenuStrip;
             this.favouritesListView.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -373,12 +376,11 @@ namespace StartMenu
             // 
             // startButton
             // 
+            this.startButton.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.startButton.ContextMenuStrip = this.startMenuStrip;
             this.startButton.Icon = ((System.Drawing.Icon)(resources.GetObject("startButton.Icon")));
             this.startButton.Text = "Old Start";
-            this.startButton.Visible = true;
             this.startButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.startButton_MouseDown);
-            this.startButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.startButton_MouseUp);
             // 
             // startMenuStrip
             // 
@@ -433,22 +435,26 @@ namespace StartMenu
             this.taskManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.taskManagerToolStripMenuItem.Text = "Task Manager";
             // 
-            // Window
+            // MenuWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
             this.ClientSize = new System.Drawing.Size(577, 589);
+            this.ControlBox = false;
             this.Controls.Add(this.favouritesListView);
             this.Controls.Add(this.backgroundPanel);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Window";
-            this.Text = "Form1";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MenuWindow";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Deactivate += new System.EventHandler(this.Window_Deactivate);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.userPanel.ResumeLayout(false);
+            this.userPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profileIcon)).EndInit();
             this.backgroundPanel.ResumeLayout(false);
             this.backgroundPanel.PerformLayout();
@@ -461,14 +467,14 @@ namespace StartMenu
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label usernamelabel;
+        private System.Windows.Forms.Panel userPanel;
+        private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.PictureBox profileIcon;
-        private System.Windows.Forms.Label domainlabel;
+        private System.Windows.Forms.Label domainLabel;
         private System.Windows.Forms.Panel backgroundPanel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Button shutdownButton;
+        private System.Windows.Forms.Button restartButton;
         private System.Windows.Forms.ImageList imageList1;
         private BetterListView favouritesListView;
         private System.Windows.Forms.TreeView allFilesTreeView;
@@ -489,7 +495,7 @@ namespace StartMenu
         private System.Windows.Forms.ToolStripMenuItem filelocStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label appsLabel;
         private System.Windows.Forms.NotifyIcon startButton;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.TreeView searchTreeView;
